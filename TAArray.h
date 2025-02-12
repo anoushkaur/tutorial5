@@ -17,10 +17,11 @@ class TAArray
     bool add(TextArea*);
     bool add(TextArea* t, int index) ;
 
-    TextArea* get(int i);
+    TextArea* TAArray::get(const string& id) const;
     bool isFull(){return size == MAX_ARR;}
     int getSize(){return size;}
     void print();
+    TextArea* TAArray::remove(const string& id);
     
 
   private:

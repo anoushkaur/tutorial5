@@ -53,3 +53,10 @@ void TextArea::print() const {
     std::cout << "Size: " << dimensions.width << ", " << dimensions.height << std::endl;
     std::cout << "Text: " << text << std::endl;
 }
+
+// Inside TextArea class
+bool TextArea::equals(const string& id) const {
+    // Assuming the TextArea has an id member
+    return this->id == id;
+}
+
