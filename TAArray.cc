@@ -77,14 +77,18 @@ TextArea* TAArray::get(const std::string& id) const {
 }
 
 TextArea* TAArray::remove(const std::string& id) {
-    try {
-        int index = std::stoi(id);  // Convert the string to an int
-        return remove(index);  // Call the remove(int) version
-    } catch (const std::invalid_argument& e) {
-        std::cerr << "Invalid string input for index: " << id << std::endl;
-        return nullptr;  // Handle error if conversion fails
-    } catch (const std::out_of_range& e) {
-        std::cerr << "Index out of range: " << id << std::endl;
-        return nullptr;  // Handle error if the index is out of range
+    // Search for the TextArea with the matching id string
+    for (int i = 0; i < size; ++i) {
+        if (arr[i]->getId() == id) {  // Assuming TextArea has a method getId() that returns the string id
+            TextArea* removed = arr[i];
+            // Perform removal logic (e.g., shift elements, etc.)
+            for (int j = i; j < size - 1; ++j) {
+                arr[j] = arr[j + 1];  // Shift elements to the left
+            }
+            --size;
+            return removed;
+        }
     }
+    std::cerr << id << " not found in order" << std::endl;
+    return nullptr;  // Return nullptr if no match is found
 }
