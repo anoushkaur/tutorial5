@@ -1,22 +1,21 @@
-
-
 #include "TAArray.h"
+#include <iostream>
+#include <stdexcept>
 
-TAArray::TAArray(){
+TAArray::TAArray() {
     size = 0;
     arr = new TextArea*[MAX_ARR];
 }
 
-TAArray::~TAArray(){
-    delete [] arr;
+TAArray::~TAArray() {
+    delete[] arr;
 }
 
-bool TAArray::add(TextArea* t){
-    if (size >= MAX_ARR)return false;
+bool TAArray::add(TextArea* t) {
+    if (size >= MAX_ARR) return false;
 
     arr[size++] = t;
     return true;
-    
 }
 
 bool TAArray::add(TextArea* t, int index) {
@@ -36,54 +35,56 @@ bool TAArray::add(TextArea* t, int index) {
     return true;
 }
 
-void TAArray::print()
-{
-  cout << endl << endl << "Text Areas:" << endl;
-  for (int i=0; i<size; ++i)
-    arr[i]->print();
-
-  cout << endl;
+void TAArray::print() {
+    std::cout << std::endl << std::endl << "Text Areas:" << std::endl;
+    for (int i = 0; i < size; ++i) {
+        arr[i]->print();
+    }
+    std::cout << std::endl;
 }
 
 TextArea* TAArray::get(int id) const {
     if (id >= 0 && id < size) {
-        return elements[id];
+        return arr[id];
     }
     return nullptr;  // Return nullptr if index is out of bounds
 }
 
 TextArea* TAArray::remove(int id) {
     if (id >= 0 && id < size) {
-        TextArea* removed = elements[id];
+        TextArea* removed = arr[id];
         // Perform removal logic (e.g., shift elements, etc.)
+        for (int i = id; i < size - 1; ++i) {
+            arr[i] = arr[i + 1];  // Shift elements to the left
+        }
+        --size;
         return removed;
     }
     return nullptr;  // Return nullptr if index is out of bounds
 }
 
-TextArea* TAArray::get(const string& id) const {
+TextArea* TAArray::get(const std::string& id) const {
     try {
-        int index = stoi(id);  // Convert the string to an int
+        int index = std::stoi(id);  // Convert the string to an int
         return get(index);  // Call the get(int) version
-    } catch (const invalid_argument& e) {
-        cerr << "Invalid string input for index: " << id << endl;
+    } catch (const std::invalid_argument& e) {
+        std::cerr << "Invalid string input for index: " << id << std::endl;
         return nullptr;  // Handle error if conversion fails
-    } catch (const out_of_range& e) {
-        cerr << "Index out of range: " << id << endl;
+    } catch (const std::out_of_range& e) {
+        std::cerr << "Index out of range: " << id << std::endl;
         return nullptr;  // Handle error if the index is out of range
     }
 }
 
-TextArea* TAArray::remove(const string& id) {
+TextArea* TAArray::remove(const std::string& id) {
     try {
-        int index = stoi(id);  // Convert the string to an int
+        int index = std::stoi(id);  // Convert the string to an int
         return remove(index);  // Call the remove(int) version
-    } catch (const invalid_argument& e) {
-        cerr << "Invalid string input for index: " << id << endl;
+    } catch (const std::invalid_argument& e) {
+        std::cerr << "Invalid string input for index: " << id << std::endl;
         return nullptr;  // Handle error if conversion fails
-    } catch (const out_of_range& e) {
-        cerr << "Index out of range: " << id << endl;
+    } catch (const std::out_of_range& e) {
+        std::cerr << "Index out of range: " << id << std::endl;
         return nullptr;  // Handle error if the index is out of range
     }
 }
-
