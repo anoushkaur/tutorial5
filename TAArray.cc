@@ -14,23 +14,7 @@ TAArray::~TAArray(){
 bool TAArray::add(TextArea* t){
     if (size >= MAX_ARR)return false;
 
-    for (int i = size; i > 0 ; --i){
-        if (t->lessThan(*arr[i-1])){
-            //keep making space by copying elements
-            //one location to the right
-            arr[i]=arr[i-1];
-        }else{
-            //we have found where s should go
-            arr[i] = t;
-            ++size;
-            return true;
-        }
-    }
-
-    //we went through every location, and s was less than 
-    //all of them. Therefore s goes in location 0
-    arr[0] = t;
-    ++size;
+    arr[size++] = t;
     return true;
     
 }
@@ -55,9 +39,9 @@ bool TAArray::add(TextArea* t, int index) {
 
 
 
-void StudentArray::print()
+void TAArray::print()
 {
-  cout << endl << endl << "Students:" << endl;
+  cout << endl << endl << "Text Areas:" << endl;
   for (int i=0; i<size; ++i)
     arr[i]->print();
 

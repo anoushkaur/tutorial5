@@ -15,7 +15,7 @@ class TAArray
     ~TAArray();
 
     bool add(TextArea*);
-
+    bool add(TextArea* t, int index) ;
 
     bool isFull(){return size == MAX_ARR;}
     int getSize(){return size;}
