@@ -67,7 +67,7 @@ TextArea* TAArray::remove(const string& id) {
 
     // If the index is valid, remove the element
     if (index < size && arr[index]->equals(id)) {
-        return remove(index);  // Call the existing remove function that removes by index
+        return remove(std::to_string(index));  // Call the existing remove function that removes by index
     }
 
     return nullptr;  // Return nullptr if no matching TextArea was found

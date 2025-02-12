@@ -21,7 +21,7 @@ class TAArray
     bool isFull(){return size == MAX_ARR;}
     int getSize(){return size;}
     void print();
-    TextArea* TAArray::remove(const string& id);
+    TextArea* remove(const string& id);
     
 
   private:

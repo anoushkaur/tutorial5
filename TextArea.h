@@ -51,7 +51,7 @@ public:
 
     
     void print() const;
-    bool TextArea::equals(const string& id) const;
+    bool equals(const string& id) const;
 };
 
 #endif 
