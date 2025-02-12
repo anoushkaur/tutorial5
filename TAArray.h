@@ -17,6 +17,8 @@ class TAArray
     bool add(TextArea*);
     bool add(TextArea* t, int index) ;
 
+    TextArea* get(int id) const;
+    TextArea* remove(int id);
     TextArea* get(const string& id) const;
     TextArea* remove(const string& id);
     bool isFull(){return size == MAX_ARR;}
