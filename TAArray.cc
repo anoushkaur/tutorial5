@@ -36,13 +36,11 @@ bool TAArray::add(TextArea* t, int index) {
     return true;
 }
 
-TextArea* TAArray::get(const string& id) const {
-    for (int i = 0; i < size; ++i) {
-        if (arr[i]->equals(id)) {  // Assuming TextArea has an equals method that compares it to a string
-            return arr[i];
-        }
+TextArea* TAArray::get(int i) const {
+    if (i >= 0 && i < size) {
+        return arr[i]; // Just return the element at index i
     }
-    return nullptr;  // Return nullptr if no match is found
+    return nullptr; // Return nullptr if index is out of bounds
 }
 
 
@@ -57,19 +55,18 @@ void TAArray::print()
   cout << endl;
 }
 
-TextArea* TAArray::remove(const string& id) {
-    int index = 0;
-    
-    // Find the index of the TextArea with the matching id
-    while (index < size && !arr[index]->equals(id)) {
-        ++index;
-    }
+TextArea* TAArray::remove(int i) {
+    if (i >= 0 && i < size) {
+        TextArea* temp = arr[i];
 
-    // If the index is valid, remove the element
-    if (index < size && arr[index]->equals(id)) {
-        return remove(std::to_string(index));  // Call the existing remove function that removes by index
-    }
+        // Shift elements to the left after removal
+        for (int j = i; j < size - 1; ++j) {
+            arr[j] = arr[j + 1];
+        }
 
-    return nullptr;  // Return nullptr if no matching TextArea was found
+        --size;  // Decrease the size of the array
+        return temp;
+    }
+    return nullptr; // Return nullptr if index is invalid
 }
 
