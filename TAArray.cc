@@ -36,6 +36,11 @@ bool TAArray::add(TextArea* t, int index) {
     return true;
 }
 
+TextArea** TAArray::get(int i){
+    if(i>-1 && i<size){
+        return arr[i];
+    }
+}
 
 
 
