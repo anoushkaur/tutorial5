@@ -56,7 +56,12 @@ TextArea* TAArray::remove(int id) {
     return nullptr;  // Return nullptr if index is out of bounds
 }
 
-TextArea* TAArray::get(string id){
+TextArea* TAArray::get(int index) const {  // const here matches the header file
+    if (index < 0 || index >= size) return NULL;
+    return arr[index];
+}
+
+TextArea* TAArray::get(const string& id) const { // const here matches the header file
     for (int i = 0; i < size; ++i){
         if (arr[i]->equals(id)){
             return arr[i];
@@ -65,10 +70,6 @@ TextArea* TAArray::get(string id){
     return NULL;
 }
 
-TextArea* TAArray::get(int index){
-    if (index < 0 || index >= size) return NULL;
-    return arr[index];
-}
 
 
 TextArea* TAArray::remove(const std::string& id) {
