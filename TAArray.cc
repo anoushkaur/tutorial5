@@ -43,13 +43,6 @@ void TAArray::print() {
     std::cout << std::endl;
 }
 
-TextArea* TAArray::get(int id) const {
-    if (id >= 0 && id < size) {
-        return arr[id];
-    }
-    return nullptr;  // Return nullptr if index is out of bounds
-}
-
 TextArea* TAArray::remove(int id) {
     if (id >= 0 && id < size) {
         TextArea* removed = arr[id];
@@ -63,18 +56,20 @@ TextArea* TAArray::remove(int id) {
     return nullptr;  // Return nullptr if index is out of bounds
 }
 
-TextArea* TAArray::get(const std::string& id) const {
-    try {
-        int index = std::stoi(id);  // Convert the string to an int
-        return get(index);  // Call the get(int) version
-    } catch (const std::invalid_argument& e) {
-        std::cerr << "Invalid string input for index: " << id << std::endl;
-        return nullptr;  // Handle error if conversion fails
-    } catch (const std::out_of_range& e) {
-        std::cerr << "Index out of range: " << id << std::endl;
-        return nullptr;  // Handle error if the index is out of range
+TextArea* TAArray::get(string id){
+    for (int i = 0; i < size; ++i){
+        if (arr[i]->equals(id)){
+            return arr[i];
+        }
     }
+    return NULL;
 }
+
+TextArea* TAArray::get(int index){
+    if (index < 0 || index >= size) return NULL;
+    return arr[index];
+}
+
 
 TextArea* TAArray::remove(const std::string& id) {
     // Search for the TextArea with the matching id string
